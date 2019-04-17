@@ -34,7 +34,10 @@ class SimpleBatcher extends stream.Transform{
 			}
 			_final(cb){
 				this._finalCB=cb;
-
+				if(this._internalBuffer.length===0){
+					this._finalCB();
+					this._disableWatcher();
+				}
 			}
 			_transform(chunck,encoding,cb){
 				this._internalBuffer.push(chunck);
