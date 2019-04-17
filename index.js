@@ -13,6 +13,9 @@ class SimpleBatcher extends stream.Transform{
 				this._activateWatcher();
 				if(this._internalBuffer.length===0){
 					this._disableWatcher();
+				  if(this._finalCB){
+						this._finalCB();
+				}
 				}
 			}
 			_disableWatcher(){
@@ -29,12 +32,14 @@ class SimpleBatcher extends stream.Transform{
 				this._internalBuffer=[];
 				this._timeout=null;
 			}
+			_final(cb){
+				this._finalCB=cb;
+
+			}
 			_transform(chunck,encoding,cb){
 				this._internalBuffer.push(chunck);
-				if(this._internalBuffer.length>=this._limit){
-					if(!this._fixedRate){
+				if(this._internalBuffer.length>=this._limit && !this._fixedRate){
 					this._throwBatch();
-					}
 				}
 				else{
 					if(!this._timeout){
@@ -46,6 +51,4 @@ class SimpleBatcher extends stream.Transform{
 
 		}
 
-
-
-		module.exports=SimpleBatcher
+module.exports=SimpleBatcher;
