@@ -1,0 +1,18 @@
+{
+  "name": "simple-stream-batcher",
+  "version": "0.0.1",
+  "description": "a simple stream batcher",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "batcher",
+    "stream",
+    "streams",
+    "batch",
+    "processing"
+  ],
+  "author": "jodevsa",
+  "license": "ISC"
+}
