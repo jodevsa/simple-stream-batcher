@@ -34,7 +34,7 @@ class SimpleBatcher extends stream.Transform{
 			}
 			_final(cb){
 				this._finalCB=cb;
-				if(this._internalBuffer.length===0){
+				if((this._internalBuffer.length<=this._limit && !this._fixedRate ) || this._internalBuffer.length===0){
 					this._finalCB();
 					this._disableWatcher();
 				}
